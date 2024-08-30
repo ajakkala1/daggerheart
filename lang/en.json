@@ -1,12 +1,12 @@
 {
   "DAGGERHEART": {
     "Ability": {
-      "Str": { "long": "Strength", "abbr": "str" },
-      "Con": { "long": "Constitution", "abbr": "con" },
-      "Dex": { "long": "Dexterity", "abbr": "dex" },
-      "Int": { "long": "Intelligence", "abbr": "int" },
-      "Wis": { "long": "Wisdom", "abbr": "wis" },
-      "Cha": { "long": "Charisma", "abbr": "cha" }
+      "Agility": { "long": "Agility", "abbr": "Agility" },
+      "Strength": { "long": "Strength", "abbr": "Strength" },
+      "Finesse": { "long": "Finesse", "abbr": "Finesse" },
+      "Instinct": { "long": "Instinct", "abbr": "Instinct" },
+      "Presence": { "long": "Presence", "abbr": "Presence" },
+      "Knowledge": { "long": "Knowledge", "abbr": "Knowledge" }
     },
     "SheetLabels": {
       "Actor": "Daggerheart Actor Sheet",
