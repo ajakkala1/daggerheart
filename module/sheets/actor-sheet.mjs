@@ -228,6 +228,7 @@ export class DaggerheartActorSheet extends ActorSheet {
    * @private
    */
   _onRoll(event) {
+    console.log('_onRoll', event)
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -243,7 +244,7 @@ export class DaggerheartActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `[ability] ${dataset.label}` : '';
+      let label = dataset.label ? `${dataset.label} Check` : '';
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       roll.toMessage({
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
