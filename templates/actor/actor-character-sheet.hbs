@@ -14,22 +14,40 @@
         and it will add a small amount of padding, a border, and will
         center all of its child elements content and text. --}}
         <div class="resource flex-group-center">
-          <label for="system.health.value" class="resource-label">Health</label>
+          <label for="system.hitpoints.value" class="resource-label">Hit Points</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.health.value" value="{{system.health.value}}" data-dtype="Number"/>
+          <input type="text" name="system.hitpoints.value" value="{{system.hitpoints.value}}" data-dtype="Number"/>
           <span> / </span>
-          <input type="text" name="system.health.max" value="{{system.health.max}}" data-dtype="Number"/>
+          <input type="text" name="system.hitpoints.max" value="{{system.hitpoints.max}}" data-dtype="Number"/>
           </div>
         </div>
 
         <div class="resource flex-group-center">
-          <label for="system.power.value" class="resource-label">Power</label>
+          <label for="system.stress.value" class="resource-label">Stress</label>
           <div class="resource-content flexrow flex-center flex-between">
-          <input type="text" name="system.power.value" value="{{system.power.value}}" data-dtype="Number"/>
+          <input type="text" name="system.stress.value" value="{{system.stress.value}}" data-dtype="Number"/>
           <span> / </span>
-          <input type="text" name="system.power.max" value="{{system.power.max}}" data-dtype="Number"/>
+          <input type="text" name="system.stress.max" value="{{system.stress.max}}" data-dtype="Number"/>
           </div>
         </div>
+
+          <div class="resource flex-group-center">
+              <label for="system.armor.value" class="resource-label">Armor</label>
+              <div class="resource-content flexrow flex-center flex-between">
+                  <input type="text" name="system.armor.value" value="{{system.armor.value}}" data-dtype="Number"/>
+                  <span> / </span>
+                  <input type="text" name="system.armor.max" value="{{system.armor.max}}" data-dtype="Number"/>
+              </div>
+          </div>
+
+          <div class="resource flex-group-center">
+              <label for="system.hope.value" class="resource-label">Hope</label>
+              <div class="resource-content flexrow flex-center flex-between">
+                  <input type="text" name="system.hope.value" value="{{system.hope.value}}" data-dtype="Number"/>
+                  <span> / </span>
+                  <input type="text" name="system.hope.max" value="{{system.hope.max}}" data-dtype="Number"/>
+              </div>
+          </div>
 
         <div class="resource flex-group-center">
           <label for="system.attributes.level.value" class="resource-label">Level</label>
@@ -66,9 +84,9 @@
           <div class="abilities flexcol">
             {{#each system.abilities as |ability key|}}
             <div class="ability flexrow flex-group-center">
-              <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="d20+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{localize (lookup @root.config.abilities key)}}</label>
+              <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll="1d12[hope]+1d12[fear]+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{localize (lookup @root.config.abilities key)}}</label>
               <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-              <span class="ability-mod rollable" data-roll="2d12+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+              <span class="ability-mod rollable" data-roll="1d12[hope]+1d12[fear]+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
             </div>
             {{/each}}
           </div>
