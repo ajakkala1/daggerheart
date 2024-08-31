@@ -55,8 +55,41 @@
           <input type="text" name="system.attributes.level.value" value="{{system.attributes.level.value}}" data-dtype="Number"/>
           </div>
         </div>
-
       </div>
+        <div class="abilities flexrow">
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.agility.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.agility.mod" data-label="Agility">Agility</label>
+                <input type="text" name="system.abilities.agility.value" value="{{system.abilities.agility.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.agility.mod" data-label="Agility">{{numberFormat system.abilities.agility.value sign=true}}</span>
+            </div>
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.strength.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.strength.mod" data-label="Strength">Strength</label>
+                <input type="text" name="system.abilities.strength.value" value="{{system.abilities.strength.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.strength.mod" data-label="Strength">{{numberFormat system.abilities.strength.value sign=true}}</span>
+            </div>
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.finesse.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.finesse.mod" data-label="Finesse">Finesse</label>
+                <input type="text" name="system.abilities.finesse.value" value="{{system.abilities.finesse.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.finesse.mod" data-label="Finesse">{{numberFormat system.abilities.finesse.value sign=true }}</span>
+            </div>
+        </div>
+        <div class="abilities flexrow">
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.instinct.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.instinct.mod" data-label="Instinct">Instinct</label>
+                <input type="text" name="system.abilities.instinct.value" value="{{system.abilities.instinct.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.instinct.mod" data-label="Instinct">{{numberFormat system.abilities.instinct.value sign=true}}</span>
+            </div>
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.presence.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.presence.mod" data-label="Presence">Presence</label>
+                <input type="text" name="system.abilities.presence.value" value="{{system.abilities.presence.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.presence.mod" data-label="Presence">{{numberFormat system.abilities.presence.value sign=true}}</span>
+            </div>
+            <div class="ability flexrow flex-group-center">
+                <label for="system.abilities.knowledge.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.knowledge.mod" data-label="Knowledge">Knowledge</label>
+                <input type="text" name="system.abilities.knowledge.value" value="{{system.abilities.knowledge.value}}" data-dtype="Number"/>
+                <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.knowledge.mod" data-label="Knowledge">{{numberFormat system.abilities.knowledge.value sign=true}}</span>
+            </div>
+        </div>
     </div>
   </header>
 
@@ -81,15 +114,7 @@
           {{!-- The grid classes are defined in scss/global/_grid.scss. To use,
           use both the "grid" and "grid-Ncol" class where "N" can be any number
           from 1 to 12 and will create that number of columns.  --}}
-          <div class="abilities flexcol">
-            {{#each system.abilities as |ability key|}}
-            <div class="ability flexrow flex-group-center">
-              <label for="system.abilities.{{key}}.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{localize (lookup @root.config.abilities key)}}</label>
-              <input type="text" name="system.abilities.{{key}}.value" value="{{ability.value}}" data-dtype="Number"/>
-              <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.{{key}}.mod" data-label="{{localize (lookup @root.config.abilities key)}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-            </div>
-            {{/each}}
-          </div>
+          
         </aside>
 
         {{!-- For the main features list, span the right two columns --}}

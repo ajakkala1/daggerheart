@@ -9,6 +9,7 @@ import { preloadHandlebarsTemplates } from './helpers/templates.mjs';
 import { DAGGERHEART } from './helpers/config.mjs';
 // Import DataModel classes
 import * as models from './data/_module.mjs';
+import DaggerheartDomainCard from "./data/item-domainCard.mjs";
 
 /* -------------------------------------------- */
 /*  Init Hook                                   */
@@ -49,7 +50,8 @@ Hooks.once('init', function () {
   CONFIG.Item.dataModels = {
     item: models.DaggerheartItem,
     feature: models.DaggerheartFeature,
-    spell: models.DaggerheartSpell
+    spell: models.DaggerheartSpell,
+    domainCard: models.DaggerheartDomainCard
   }
 
   // Active Effects are never copied to the Actor,
