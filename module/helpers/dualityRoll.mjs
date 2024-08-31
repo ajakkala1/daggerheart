@@ -46,9 +46,9 @@ export function buildTemplateFromDualityResult({hope, fear, total, mod, label}) 
 
     let modStr = ''
     if (mod > 0) {
-        modStr = `+ ${mod}`
+        modStr = `+${mod}`
     } else if (mod < 0) {
-        modStr = `- ${mod}`
+        modStr = `${mod}`
     } else {
         modStr = '0'
     }

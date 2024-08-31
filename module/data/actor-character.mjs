@@ -16,7 +16,7 @@ export default class DaggerheartCharacter extends DaggerheartActorBase {
     // Iterate over ability names and create a new SchemaField for each.
     schema.abilities = new fields.SchemaField(Object.keys(CONFIG.DAGGERHEART.abilities).reduce((obj, ability) => {
       obj[ability] = new fields.SchemaField({
-        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: 0 }),
+        value: new fields.NumberField({ ...requiredInteger, initial: 0, min: -10 }),
       });
       return obj;
     }, {}));
@@ -28,7 +28,7 @@ export default class DaggerheartCharacter extends DaggerheartActorBase {
     // Loop through ability scores, and add their modifiers to our sheet output.
     for (const key in this.abilities) {
       // Calculate the modifier using d20 rules.
-      this.abilities[key].mod = Math.floor(this.abilities[key].value);
+      this.abilities[key].mod = this.abilities[key].value;
       // Handle ability label localization.
       this.abilities[key].label = game.i18n.localize(CONFIG.DAGGERHEART.abilities[key]) ?? key;
     }
