@@ -63,6 +63,9 @@ export class DaggerheartActor extends Actor {
     // Add effects.
     result.effects = this.effects?.size > 0 ? this.effects.contents : [];
 
+    //Add domain cards.
+    result.domainCards = this.domainCards?.size > 0 ? this.domainCards.contents : [];
+
     return result;
   }
 
