@@ -26,12 +26,12 @@
     "verified": "11.315"
   },
   "scripts": ["dist/main.mjs.iife.js"],
-  "styles": ["src/css/daggerheart.css"],
+  "styles": ["css/daggerheart.css"],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "src/lang/en.json"
+      "path": "lang/en.json"
     }
   ],
   "packs": [],

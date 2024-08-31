@@ -10,7 +10,7 @@ export default defineConfig({
 
     minify: "terser",
 
-    lib: {"entry":"src/module/main.ts","formats":["iife"],
+    lib: {"entry":"module/main.ts","formats":["iife"],
 
       name: "app",fileName: "main.mjs",},
 
