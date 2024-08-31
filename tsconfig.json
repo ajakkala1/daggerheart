@@ -18,11 +18,15 @@
     /**
      * Modified configs
      */
-    "types": ["svelte","@league-of-foundry-developers/foundry-vtt-types","node"],
+    "types": [
+      "svelte",
+      "@league-of-foundry-developers/foundry-vtt-types",
+      "node"
+    ],
     "moduleResolution": "Node16",
     "esModuleInterop": true,
     "strict": true,
-    "allowUmdGlobalAccess": true,
+    "allowUmdGlobalAccess": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"],

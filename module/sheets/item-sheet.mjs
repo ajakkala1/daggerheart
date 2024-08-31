@@ -1,7 +1,7 @@
 import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
-} from '../helpers/effects.mjs';
+} from "../helpers/effects.mjs";
 
 /**
  * Extend the basic ItemSheet with some very simple modifications
@@ -11,14 +11,14 @@ export class DaggerheartItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['daggerheart', 'sheet', 'item'],
+      classes: ["daggerheart", "sheet", "item"],
       width: 520,
       height: 480,
       tabs: [
         {
-          navSelector: '.sheet-tabs',
-          contentSelector: '.sheet-body',
-          initial: 'description',
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "description",
         },
       ],
     });
@@ -26,7 +26,7 @@ export class DaggerheartItemSheet extends ItemSheet {
 
   /** @override */
   get template() {
-    const path = 'systems/daggerheart/templates/item';
+    const path = "systems/daggerheart/templates/item";
     // Return a single sheet for all item types.
     // return `${path}/item-sheet.hbs`;
 
@@ -58,7 +58,7 @@ export class DaggerheartItemSheet extends ItemSheet {
         rollData: this.item.getRollData(),
         // Relative UUID resolution
         relativeTo: this.item,
-      }
+      },
     );
 
     // Add the item's data to context.data for easier access, as well as flags.
@@ -86,8 +86,8 @@ export class DaggerheartItemSheet extends ItemSheet {
     // Roll handlers, click handlers, etc. would go here.
 
     // Active Effect management
-    html.on('click', '.effect-control', (ev) =>
-      onManageActiveEffect(ev, this.item)
+    html.on("click", ".effect-control", (ev) =>
+      onManageActiveEffect(ev, this.item),
     );
   }
 }

@@ -1,11 +1,11 @@
 import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
-} from '../helpers/effects.mjs';
+} from "../helpers/effects.mjs";
 import {
   getDualityResult,
   buildTemplateFromDualityResult,
-} from '../helpers/dualityRoll.mjs';
+} from "../helpers/dualityRoll.mjs";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -15,14 +15,14 @@ export class DaggerheartActorSheet extends ActorSheet {
   /** @override */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ['daggerheart', 'sheet', 'actor'],
+      classes: ["daggerheart", "sheet", "actor"],
       width: 600,
       height: 600,
       tabs: [
         {
-          navSelector: '.sheet-tabs',
-          contentSelector: '.sheet-body',
-          initial: 'features',
+          navSelector: ".sheet-tabs",
+          contentSelector: ".sheet-body",
+          initial: "features",
         },
       ],
     });
@@ -54,13 +54,13 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.config = CONFIG.DAGGERHEART;
 
     // Prepare character data and items.
-    if (actorData.type == 'character') {
+    if (actorData.type == "character") {
       this._prepareItems(context);
       this._prepareCharacterData(context);
     }
 
     // Prepare NPC data and items.
-    if (actorData.type == 'npc') {
+    if (actorData.type == "npc") {
       this._prepareItems(context);
     }
 
@@ -77,14 +77,14 @@ export class DaggerheartActorSheet extends ActorSheet {
         rollData: this.actor.getRollData(),
         // Relative UUID resolution
         relativeTo: this.actor,
-      }
+      },
     );
 
     // Prepare active effects
     context.effects = prepareActiveEffectCategories(
       // A generator that returns all effects stored on the actor
       // as well as any items
-      this.actor.allApplicableEffects()
+      this.actor.allApplicableEffects(),
     );
 
     return context;
@@ -110,130 +110,133 @@ export class DaggerheartActorSheet extends ActorSheet {
     const gear = [];
     const features = [];
     const domainCards = {
-      "Arcana"    : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Arcana: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Blade"     : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Blade: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Bone"      : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Bone: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Codex"     : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Codex: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Grace"     : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Grace: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Midnight"  : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Midnight: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Sage"      : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Sage: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Splendor"  : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
+      Splendor: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
       },
-      "Valor"     : {
-        1 : [],
-        2 : [],
-        3 : [],
-        4 : [],
-        5 : [],
-        6 : [],
-        7 : [],
-        8 : [],
-        9 : [],
-        10: []
-      }
+      Valor: {
+        1: [],
+        2: [],
+        3: [],
+        4: [],
+        5: [],
+        6: [],
+        7: [],
+        8: [],
+        9: [],
+        10: [],
+      },
     };
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
       i.img = i.img || Item.DEFAULT_ICON;
       // Append to gear.
-      if (i.type === 'item') {
+      if (i.type === "item") {
         gear.push(i);
       }
       // Append to features.
-      else if (i.type === 'feature') {
+      else if (i.type === "feature") {
         features.push(i);
       }
       // Append to spells.
-      else if (i.type === 'domainCard') {
-        if (i.system.cardLevel !== undefined || i.system.domainName !== undefined) {
+      else if (i.type === "domainCard") {
+        if (
+          i.system.cardLevel !== undefined ||
+          i.system.domainName !== undefined
+        ) {
           domainCards[i.system.domainName][i.system.cardLevel].push(i);
         }
       }
@@ -252,9 +255,9 @@ export class DaggerheartActorSheet extends ActorSheet {
     super.activateListeners(html);
 
     // Render the item sheet for viewing/editing prior to the editable check.
-    html.on('click', '.item-edit', (ev) => {
-      const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.items.get(li.data('itemId'));
+    html.on("click", ".item-edit", (ev) => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
       item.sheet.render(true);
     });
 
@@ -263,19 +266,19 @@ export class DaggerheartActorSheet extends ActorSheet {
     if (!this.isEditable) return;
 
     // Add Inventory Item
-    html.on('click', '.item-create', this._onItemCreate.bind(this));
+    html.on("click", ".item-create", this._onItemCreate.bind(this));
 
     // Delete Inventory Item
-    html.on('click', '.item-delete', (ev) => {
-      const li = $(ev.currentTarget).parents('.item');
-      const item = this.actor.items.get(li.data('itemId'));
+    html.on("click", ".item-delete", (ev) => {
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
       item.delete();
       li.slideUp(200, () => this.render(false));
     });
 
     // Active Effect management
-    html.on('click', '.effect-control', (ev) => {
-      const row = ev.currentTarget.closest('li');
+    html.on("click", ".effect-control", (ev) => {
+      const row = ev.currentTarget.closest("li");
       const document =
         row.dataset.parentId === this.actor.id
           ? this.actor
@@ -284,15 +287,15 @@ export class DaggerheartActorSheet extends ActorSheet {
     });
 
     // Rollable abilities.
-    html.on('click', '.rollable', this._onRoll.bind(this));
+    html.on("click", ".rollable", this._onRoll.bind(this));
 
     // Drag events for macros.
     if (this.actor.isOwner) {
       let handler = (ev) => this._onDragStart(ev);
-      html.find('li.item').each((i, li) => {
-        if (li.classList.contains('inventory-header')) return;
-        li.setAttribute('draggable', true);
-        li.addEventListener('dragstart', handler, false);
+      html.find("li.item").each((i, li) => {
+        if (li.classList.contains("inventory-header")) return;
+        li.setAttribute("draggable", true);
+        li.addEventListener("dragstart", handler, false);
       });
     }
   }
@@ -318,7 +321,7 @@ export class DaggerheartActorSheet extends ActorSheet {
       system: data,
     };
     // Remove the type from the dataset since it's in the itemData.type prop.
-    delete itemData.system['type'];
+    delete itemData.system["type"];
 
     // Finally, create the item!
     return await Item.create(itemData, { parent: this.actor });
@@ -330,15 +333,15 @@ export class DaggerheartActorSheet extends ActorSheet {
    * @private
    */
   async _onRoll(event) {
-    console.log('_onRoll', event)
+    console.log("_onRoll", event);
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
 
     // Handle item rolls.
     if (dataset.rollType) {
-      if (dataset.rollType == 'item') {
-        const itemId = element.closest('.item').dataset.itemId;
+      if (dataset.rollType == "item") {
+        const itemId = element.closest(".item").dataset.itemId;
         const item = this.actor.items.get(itemId);
         if (item) return item.roll();
       }
@@ -346,19 +349,22 @@ export class DaggerheartActorSheet extends ActorSheet {
 
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
-      let label = dataset.label ? `${dataset.label} Check` : '';
+      let label = dataset.label ? `${dataset.label} Check` : "";
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       let messageData = {
-        speaker: ChatMessage.getSpeaker({actor: this.actor}),
+        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
-        rollMode: game.settings.get('core', 'rollMode'),
-      }
-      if (dataset.rollType && dataset.rollType === 'duality') {
+        rollMode: game.settings.get("core", "rollMode"),
+      };
+      if (dataset.rollType && dataset.rollType === "duality") {
         const result = await roll.evaluate();
-        console.log('result', result)
-        const rollResult = getDualityResult(result)
-        messageData.content = buildTemplateFromDualityResult({...rollResult, label: dataset.label})
-        ChatMessage.create(messageData)
+        console.log("result", result);
+        const rollResult = getDualityResult(result);
+        messageData.content = buildTemplateFromDualityResult({
+          ...rollResult,
+          label: dataset.label,
+        });
+        ChatMessage.create(messageData);
       } else {
         roll.toMessage(messageData);
       }
