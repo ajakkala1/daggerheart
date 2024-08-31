@@ -8,6 +8,11 @@
       "Presence": { "long": "Presence", "abbr": "Presence" },
       "Knowledge": { "long": "Knowledge", "abbr": "Knowledge" }
     },
+    "RollResults": {
+      "WithHope": "with Hope",
+      "WithFear": "with Fear",
+      "Critical": "CRITICAL"
+    },
     "SheetLabels": {
       "Actor": "Daggerheart Actor Sheet",
       "Item": "Daggerheart Item Sheet"
