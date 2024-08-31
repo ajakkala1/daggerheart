@@ -1,0 +1,30 @@
+{
+  "extends": "@tsconfig/svelte/tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "resolveJsonModule": true,
+    /**
+     * Typecheck JS in `.svelte` and `.js` files by default.
+     * Disable checkJs if you'd like to use dynamic types in JS.
+     * Note that setting allowJs false does not prevent the use
+     * of JS in `.svelte` files.
+     */
+    "allowJs": true,
+    "checkJs": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    /**
+     * Modified configs
+     */
+    "types": ["svelte","@league-of-foundry-developers/foundry-vtt-types","node"],
+    "moduleResolution": "Node16",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowUmdGlobalAccess": true,
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules/*", "__sapper__/*", "public/*"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

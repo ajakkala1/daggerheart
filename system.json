@@ -25,13 +25,13 @@
     "minimum": 11,
     "verified": "11.315"
   },
-  "esmodules": ["module/daggerheart.mjs"],
-  "styles": ["css/daggerheart.css"],
+  "scripts": ["dist/main.mjs.iife.js"],
+  "styles": ["src/css/daggerheart.css"],
   "languages": [
     {
       "lang": "en",
       "name": "English",
-      "path": "lang/en.json"
+      "path": "src/lang/en.json"
     }
   ],
   "packs": [],
