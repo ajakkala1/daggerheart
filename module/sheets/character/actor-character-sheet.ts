@@ -42,8 +42,8 @@ export class DaggerheartActorSheet extends ActorSheet {
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["daggerheart", "sheet", "actor"],
-      width: 600,
-      height: 600,
+      width: 900,
+      height: 900,
       tabs: [
         {
           navSelector: ".sheet-tabs",
@@ -77,6 +77,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.actor = actorData;
     context.system = actorData.system;
     context.flags = actorData.flags;
+    context.documentRef = this.document;
 
     // Adding a pointer to CONFIG.DAGGERHEART
     // @ts-ignore
