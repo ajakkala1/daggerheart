@@ -1,57 +1,34 @@
-<script>
+<script lang="ts">
+    import Resource from '../shared-components/resource.svelte'
+    import Level from '../shared-components/level-indicator.svelte'
     export let sheetData
-    const { actor, system } = sheetData
+    const { actor, system, documentRef } = sheetData
+    function poop (schemaName: string, value: number) {
+        console.log('update', schemaName, value)
+        actor.update({[schemaName]: value})
+    }
+    $: hpValue = system.hitpoints.value
+    $: hpMax = system.hitpoints.max
+    function updateHp(event: CustomEvent<{ value: number }>) {
+        documentRef.update({'system.hitpoints.value': event.detail.value})
+    }
 </script>
 
 <!-- Sheet Header -->
-<header class="sheet-header">
+<header class="sheet-header bg-base-100 text-neutral-100">
     <img alt="profile" class="profile-img" src="{actor.img}" data-edit="img" title="{actor.name}" height="100" width="100"/>
     <div class="header-fields">
         <h1 class="charname">
             <input name="name" type="text" value="{actor.name}" placeholder="Name"/>
         </h1>
         <div class="resources grid grid-3col">
-            <div class="resource flex-group-center">
-                <label for="system.hitpoints.value" class="resource-label">Hit Points</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.hitpoints.value" value="{system.hitpoints.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.hitpoints.max" value="{system.hitpoints.max}" data-dtype="Number"/>
-                </div>
-            </div>
+            <Resource label="HP" value="{hpValue}" max="{hpMax}" on:update={updateHp}/>
+            <Resource label="STRESS" value="{system.stress.value}" max="{system.stress.max}" on:update={event => documentRef.update({'system.stress.value': event.detail.value})}/>
+            <Resource label="ARMOR" value="{system.armor.value}" max="{system.armor.max}" on:update={event => documentRef.update({'system.armor.value': event.detail.value})}/>
+            <Resource label="HOPE" value="{system.hope.value}" max="{system.hope.max}" on:update={event => documentRef.update({'system.hope.value': event.detail.value})}/>
 
             <div class="resource flex-group-center">
-                <label for="system.stress.value" class="resource-label">Stress</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.stress.value" value="{system.stress.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.stress.max" value="{system.stress.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.armor.value" class="resource-label">Armor</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.armor.value" value="{system.armor.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.armor.max" value="{system.armor.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.hope.value" class="resource-label">Hope</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.hope.value" value="{system.hope.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.hope.max" value="{system.hope.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.attributes.level.value" class="resource-label">Level</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.attributes.level.value" value="{system.attributes.level.value}" data-dtype="Number"/>
-                </div>
+                <Level levelSchema="{system.attributes.level}"/>
             </div>
         </div>
         <div class="abilities flex flex-row">
