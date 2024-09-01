@@ -1,4 +1,5 @@
 <script>
+    import Resource from '../shared-components/resource.svelte'
     export let sheetData
     const { actor, system } = sheetData
 </script>
@@ -11,41 +12,11 @@
             <input name="name" type="text" value="{actor.name}" placeholder="Name"/>
         </h1>
         <div class="resources grid grid-3col">
-            <div class="resource flex-group-center">
-                <label for="system.hitpoints.value" class="resource-label">Hit Points</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.hitpoints.value" value="{system.hitpoints.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.hitpoints.max" value="{system.hitpoints.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.stress.value" class="resource-label">Stress</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.stress.value" value="{system.stress.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.stress.max" value="{system.stress.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.armor.value" class="resource-label">Armor</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.armor.value" value="{system.armor.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.armor.max" value="{system.armor.max}" data-dtype="Number"/>
-                </div>
-            </div>
-
-            <div class="resource flex-group-center">
-                <label for="system.hope.value" class="resource-label">Hope</label>
-                <div class="resource-content flex flex-row items-center space-between">
-                    <input type="text" name="system.hope.value" value="{system.hope.value}" data-dtype="Number"/>
-                    <span> / </span>
-                    <input type="text" name="system.hope.max" value="{system.hope.max}" data-dtype="Number"/>
-                </div>
-            </div>
+            <button class="daisy-button"></button>
+            <Resource label="Hit Points" value="{system.hitpoints.value}" maxValue="{system.hitpoints.max}"/>
+            <Resource label="Stress" value="{system.stress.value}" maxValue="{system.stress.max}"/>
+            <Resource label="Armor" value="{system.armor.value}" maxValue="{system.armor.max}"/>
+            <Resource label="Hope" value="{system.hope.value}" maxValue="{system.hope.max}"/>
 
             <div class="resource flex-group-center">
                 <label for="system.attributes.level.value" class="resource-label">Level</label>
