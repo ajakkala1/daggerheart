@@ -25,7 +25,7 @@
     "minimum": 11,
     "verified": "11.315"
   },
-  "esmodules": ["module/daggerheart.mjs"],
+  "scripts": ["dist/main.mjs.iife.js"],
   "styles": ["css/daggerheart.css"],
   "languages": [
     {

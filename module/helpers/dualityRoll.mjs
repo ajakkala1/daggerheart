@@ -4,11 +4,13 @@
  * @returns {{total: (*|PaymentItem|number), mod: number, hope: {stats: {start: number, entry: string}} | string | ArrayBuffer | T | SVGAnimatedString, fear: {stats: {start: number, entry: string}} | string | ArrayBuffer | T | SVGAnimatedString}}
  */
 export function getDualityResult(rollResult) {
-    const hope = rollResult.terms.find(term => term.options.flavor === 'hope').results[0].result
-    const fear = rollResult.terms.find(term => term.options.flavor === 'fear').results[0].result
-    const total = rollResult.total
-    const mod = total - hope - fear
-    return {hope, fear, total, mod}
+  const hope = rollResult.terms.find((term) => term.options.flavor === "hope")
+    .results[0].result;
+  const fear = rollResult.terms.find((term) => term.options.flavor === "fear")
+    .results[0].result;
+  const total = rollResult.total;
+  const mod = total - hope - fear;
+  return { hope, fear, total, mod };
 }
 
 /**
@@ -19,41 +21,47 @@ export function getDualityResult(rollResult) {
  * @param label
  * @returns {string}
  */
-export function buildTemplateFromDualityResult({hope, fear, total, mod, label}) {
-    const withHopeStr = game.i18n.localize('DAGGERHEART.RollResults.WithHope')
-    const withFearStr = game.i18n.localize('DAGGERHEART.RollResults.WithFear')
-    const criticalStr = game.i18n.localize('DAGGERHEART.RollResults.Critical')
-    let resultMessage;
-    let resultColor;
-    let textColor;
-    let border;
-    if (hope > fear) {
-        resultMessage = `${total} ${withHopeStr}`
-        resultColor = '#B0D7FF'
-        textColor = '#000000'
-        border = '1px solid black'
-    } else if (hope < fear) {
-        resultMessage = `${total} ${withFearStr}`
-        resultColor = '#2D3142'
-        textColor = '#FFFFFF'
-        border = '1px solid black'
-    } else {
-        resultMessage = `${total} ${criticalStr}`
-        resultColor = '#5863F8'
-        textColor = '#000000'
-        border = '2px solid black'
-    }
+export function buildTemplateFromDualityResult({
+  hope,
+  fear,
+  total,
+  mod,
+  label,
+}) {
+  const withHopeStr = game.i18n.localize("DAGGERHEART.RollResults.WithHope");
+  const withFearStr = game.i18n.localize("DAGGERHEART.RollResults.WithFear");
+  const criticalStr = game.i18n.localize("DAGGERHEART.RollResults.Critical");
+  let resultMessage;
+  let resultColor;
+  let textColor;
+  let border;
+  if (hope > fear) {
+    resultMessage = `${total} ${withHopeStr}`;
+    resultColor = "#B0D7FF";
+    textColor = "#000000";
+    border = "1px solid black";
+  } else if (hope < fear) {
+    resultMessage = `${total} ${withFearStr}`;
+    resultColor = "#2D3142";
+    textColor = "#FFFFFF";
+    border = "1px solid black";
+  } else {
+    resultMessage = `${total} ${criticalStr}`;
+    resultColor = "#5863F8";
+    textColor = "#000000";
+    border = "2px solid black";
+  }
 
-    let modStr = ''
-    if (mod > 0) {
-        modStr = `+${mod}`
-    } else if (mod < 0) {
-        modStr = `${mod}`
-    } else {
-        modStr = '0'
-    }
+  let modStr = "";
+  if (mod > 0) {
+    modStr = `+${mod}`;
+  } else if (mod < 0) {
+    modStr = `${mod}`;
+  } else {
+    modStr = "0";
+  }
 
-    return `
+  return `
       <div class="message-content">
         <div class="dice-roll">
           <div class="dice-result">
@@ -93,5 +101,5 @@ export function buildTemplateFromDualityResult({hope, fear, total, mod, label}) 
           </div>
         </div>
       </div>
-    `
+    `;
 }
