@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "output.css";
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 /* Global styles */
 .window-app {
