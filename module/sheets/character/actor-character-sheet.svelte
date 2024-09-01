@@ -13,6 +13,14 @@
         <div class="resources grid grid-3col">
             <div class="resource flex-group-center">
                 <label for="system.hitpoints.value" class="resource-label">Hit Points</label>
+                <div class="flex flex-row flex-grow flex-wrap gap-2">
+                    <input type="checkbox" checked class="daisy-checkbox"/>
+                    <input type="checkbox" class="daisy-checkbox"/>
+                    <input type="checkbox" class="daisy-checkbox"/>
+                    <input type="checkbox" class="daisy-checkbox"/>
+                    <input type="checkbox" class="daisy-checkbox"/>
+                    <input type="checkbox" class="daisy-checkbox"/>
+                </div>
                 <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.hitpoints.value" value="{system.hitpoints.value}" data-dtype="Number"/>
                     <span> / </span>
