@@ -8,7 +8,7 @@ export default class DaggerheartDomainCard extends DaggerheartItemBase {
     schema.domainName = new fields.StringField({
       required: true,
       nullable: false,
-      blank: false,
+      blank: true,
       choices: [
         "Arcana",
         "Blade",

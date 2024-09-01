@@ -2,8 +2,8 @@
 import { DaggerheartActor } from "./documents/actor.js";
 import { DaggerheartItem } from "./documents/item.js";
 // Import sheet classes.
-import { DaggerheartActorSheet } from "./sheets/actor-sheet.js";
-import { DaggerheartItemSheet } from "./sheets/item-sheet.mjs";
+import { DaggerheartActorSheet } from "./sheets/character/actor-character-sheet.js";
+import { DaggerheartDomainCardSheet } from "./sheets/domainCard/domainCard.js";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { DAGGERHEART } from "./helpers/config.mjs";

@@ -1,13 +1,13 @@
 import {
   onManageActiveEffect,
   prepareActiveEffectCategories,
-} from "../helpers/effects.mjs";
+} from "../../helpers/effects.mjs";
 import {
   getDualityResult,
   buildTemplateFromDualityResult,
-} from "../helpers/dualityRoll.mjs";
-import FormApp from "./actor-sheet.svelte";
-import { DaggerheartItem } from "../documents/item.js";
+} from "../../helpers/dualityRoll.mjs";
+import FormApp from "./actor-character-sheet.svelte";
+import { DaggerheartItem } from "../../documents/item.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
