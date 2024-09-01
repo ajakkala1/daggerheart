@@ -1,12 +1,12 @@
-import daisyui from "daisyui";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./module/sheets/**/*.{svelte,js,ts,mjs}"],
   theme: {
     extend: {},
   },
-  plugins: [daisyui],
+  plugins: [require("daisyui")],
   daisyui: {
-    prefix: "daisy",
+    prefix: "daisy-",
+    logs: true,
   },
 };
