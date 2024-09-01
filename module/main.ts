@@ -4,6 +4,7 @@ import { DaggerheartItem } from "./documents/item.js";
 // Import sheet classes.
 import { DaggerheartActorSheet } from "./sheets/character/actor-character-sheet.js";
 import { DaggerheartDomainCardSheet } from "./sheets/domainCard/domainCard.js";
+import { DaggerheartNPCSheet } from "./sheets/npc/actor-npc-sheet";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
 import { DAGGERHEART } from "./helpers/config.mjs";
@@ -67,11 +68,18 @@ Hooks.once("init", function () {
   Actors.registerSheet("daggerheart", DaggerheartActorSheet, {
     makeDefault: true,
     label: "DAGGERHEART.SheetLabels.Actor",
+    types: ["character"],
+  });
+  Actors.registerSheet("daggerheart", DaggerheartNPCSheet, {
+    makeDefault: true,
+    label: "DAGGERHEART.SheetLabels.Actor",
+    types: ["npc"],
   });
   Items.unregisterSheet("core", ItemSheet);
-  Items.registerSheet("daggerheart", DaggerheartItemSheet, {
+  Items.registerSheet("daggerheart", DaggerheartDomainCardSheet, {
     makeDefault: true,
     label: "DAGGERHEART.SheetLabels.Item",
+    types: ["domainCard"],
   });
 
   // Preload Handlebars templates.
