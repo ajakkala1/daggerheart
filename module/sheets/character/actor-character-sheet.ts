@@ -57,7 +57,7 @@ export class DaggerheartActorSheet extends ActorSheet {
 
   /** @override */
   get template() {
-    return `systems/daggerheart/templates/actor/actor-${this.actor.type}-sheet.hbs`;
+    return `systems/daggerheart/templates/actor/actor-character-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
