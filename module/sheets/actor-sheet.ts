@@ -7,6 +7,7 @@ import {
   buildTemplateFromDualityResult,
 } from "../helpers/dualityRoll.mjs";
 import FormApp from "./actor-sheet.svelte";
+import { DaggerheartItem } from "../documents/item.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -14,8 +15,9 @@ import FormApp from "./actor-sheet.svelte";
  */
 export class DaggerheartActorSheet extends ActorSheet {
   // Injects Svelte app when initializing HTML
-  async _injectHTML(html) {
+  async _injectHTML(html: JQuery) {
     await super._injectHTML(html);
+    // @ts-ignore
     this.app = new FormApp({
       target: html.find("form")[0],
       props: {
@@ -25,8 +27,9 @@ export class DaggerheartActorSheet extends ActorSheet {
   }
 
   // Injects Svelte app when replacing innerHTML
-  async _replaceHTML(element, html) {
+  async _replaceHTML(element: JQuery, html: JQuery) {
     await super._replaceHTML(element, html);
+    // @ts-ignore
     this.app = new FormApp({
       target: html.find("form")[0],
       props: {
@@ -65,10 +68,10 @@ export class DaggerheartActorSheet extends ActorSheet {
     // the context variable to see the structure, but some key properties for
     // sheets are the actor object, the data object, whether or not it's
     // editable, the items array, and the effects array.
-    const context = super.getData();
+    const context = super.getData() as any;
 
     // Use a safe clone of the actor data for further operations.
-    const actorData = this.document.toPlainObject();
+    const actorData = (this.document as any).toPlainObject();
 
     // Add the actor's data to context.data for easier access, as well as flags.
     context.actor = actorData;
@@ -76,6 +79,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.flags = actorData.flags;
 
     // Adding a pointer to CONFIG.DAGGERHEART
+    // @ts-ignore
     context.config = CONFIG.DAGGERHEART;
 
     // Prepare character data and items.
@@ -109,7 +113,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.effects = prepareActiveEffectCategories(
       // A generator that returns all effects stored on the actor
       // as well as any items
-      this.actor.allApplicableEffects(),
+      (this.actor as any).allApplicableEffects(),
     );
 
     return context;
@@ -120,7 +124,7 @@ export class DaggerheartActorSheet extends ActorSheet {
    *
    * @param {object} context The context object to mutate
    */
-  _prepareCharacterData(context) {
+  _prepareCharacterData(context: any) {
     // This is where you can enrich character-specific editor fields
     // or setup anything else that's specific to this type
   }
@@ -130,7 +134,7 @@ export class DaggerheartActorSheet extends ActorSheet {
    *
    * @param {object} context The context object to mutate
    */
-  _prepareItems(context) {
+  _prepareItems(context: any) {
     // Initialize containers.
     const gear = [];
     const features = [];
@@ -247,7 +251,7 @@ export class DaggerheartActorSheet extends ActorSheet {
 
     // Iterate through items, allocating to containers
     for (let i of context.items) {
-      i.img = i.img || Item.DEFAULT_ICON;
+      i.img = i.img || (Item as any).DEFAULT_ICON;
       // Append to gear.
       if (i.type === "item") {
         gear.push(i);
@@ -262,6 +266,7 @@ export class DaggerheartActorSheet extends ActorSheet {
           i.system.cardLevel !== undefined ||
           i.system.domainName !== undefined
         ) {
+          // @ts-ignore
           domainCards[i.system.domainName][i.system.cardLevel].push(i);
         }
       }
@@ -276,14 +281,14 @@ export class DaggerheartActorSheet extends ActorSheet {
   /* -------------------------------------------- */
 
   /** @override */
-  activateListeners(html) {
+  activateListeners(html: JQuery) {
     super.activateListeners(html);
 
     // Render the item sheet for viewing/editing prior to the editable check.
     html.on("click", ".item-edit", (ev) => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
-      item.sheet.render(true);
+      item?.sheet?.render(true);
     });
 
     // -------------------------------------------------------------
@@ -297,7 +302,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     html.on("click", ".item-delete", (ev) => {
       const li = $(ev.currentTarget).parents(".item");
       const item = this.actor.items.get(li.data("itemId"));
-      item.delete();
+      item?.delete();
       li.slideUp(200, () => this.render(false));
     });
 
@@ -308,6 +313,7 @@ export class DaggerheartActorSheet extends ActorSheet {
         row.dataset.parentId === this.actor.id
           ? this.actor
           : this.actor.items.get(row.dataset.parentId);
+      // @ts-ignore
       onManageActiveEffect(ev, document);
     });
 
@@ -316,10 +322,11 @@ export class DaggerheartActorSheet extends ActorSheet {
 
     // Drag events for macros.
     if (this.actor.isOwner) {
+      // @ts-ignore
       let handler = (ev) => this._onDragStart(ev);
       html.find("li.item").each((i, li) => {
         if (li.classList.contains("inventory-header")) return;
-        li.setAttribute("draggable", true);
+        li.setAttribute("draggable", true as any);
         li.addEventListener("dragstart", handler, false);
       });
     }
@@ -330,7 +337,7 @@ export class DaggerheartActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  async _onItemCreate(event) {
+  async _onItemCreate(event: Event | any) {
     event.preventDefault();
     const header = event.currentTarget;
     // Get the type of item to create.
@@ -357,7 +364,7 @@ export class DaggerheartActorSheet extends ActorSheet {
    * @param {Event} event   The originating click event
    * @private
    */
-  async _onRoll(event) {
+  async _onRoll(event: any) {
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -366,7 +373,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     if (dataset.rollType) {
       if (dataset.rollType == "item") {
         const itemId = element.closest(".item").dataset.itemId;
-        const item = this.actor.items.get(itemId);
+        const item = this.actor.items.get(itemId) as DaggerheartItem;
         if (item) return item.roll();
       }
     }
@@ -378,7 +385,8 @@ export class DaggerheartActorSheet extends ActorSheet {
       let messageData = {
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         flavor: label,
-        rollMode: game.settings.get("core", "rollMode"),
+        rollMode: (game as Game).settings.get("core", "rollMode"),
+        content: undefined as string | undefined,
       };
       if (dataset.rollType && dataset.rollType === "duality") {
         const result = await roll.evaluate();

@@ -2,7 +2,7 @@
 import { DaggerheartActor } from "./documents/actor.js";
 import { DaggerheartItem } from "./documents/item.js";
 // Import sheet classes.
-import { DaggerheartActorSheet } from "./sheets/actor-sheet.mjs";
+import { DaggerheartActorSheet } from "./sheets/actor-sheet.js";
 import { DaggerheartItemSheet } from "./sheets/item-sheet.mjs";
 // Import helper/utility classes and constants.
 import { preloadHandlebarsTemplates } from "./helpers/templates.mjs";
