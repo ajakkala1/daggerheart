@@ -1,8 +1,6 @@
 <script>
     export let sheetData
-    console.log('sheetData', sheetData)
-    const { actor, data, system } = sheetData
-    // const localize = (str) => game.i18n.localize(str)
+    const { actor, system } = sheetData
 </script>
 
 <!-- Sheet Header -->

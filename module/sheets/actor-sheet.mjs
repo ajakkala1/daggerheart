@@ -13,7 +13,6 @@ import FormApp from "./actor-sheet.svelte";
  * @extends {ActorSheet}
  */
 export class DaggerheartActorSheet extends ActorSheet {
-
   // Injects Svelte app when initializing HTML
   async _injectHTML(html) {
     await super._injectHTML(html);
@@ -36,7 +35,6 @@ export class DaggerheartActorSheet extends ActorSheet {
     });
   }
 
-
   /** @override */
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
@@ -51,13 +49,11 @@ export class DaggerheartActorSheet extends ActorSheet {
         },
       ],
     });
-    console.log('get defaultOptions', options)
-    return options
+    return options;
   }
 
   /** @override */
   get template() {
-    console.log('get template', `systems/daggerheart/templates/actor/actor-${this.actor.type}-sheet.hbs`)
     return `systems/daggerheart/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
@@ -116,7 +112,6 @@ export class DaggerheartActorSheet extends ActorSheet {
       this.actor.allApplicableEffects(),
     );
 
-    console.log('Exporting context', context)
     return context;
   }
 
@@ -363,7 +358,6 @@ export class DaggerheartActorSheet extends ActorSheet {
    * @private
    */
   async _onRoll(event) {
-    console.log("_onRoll", event);
     event.preventDefault();
     const element = event.currentTarget;
     const dataset = element.dataset;
@@ -388,7 +382,6 @@ export class DaggerheartActorSheet extends ActorSheet {
       };
       if (dataset.rollType && dataset.rollType === "duality") {
         const result = await roll.evaluate();
-        console.log("result", result);
         const rollResult = getDualityResult(result);
         messageData.content = buildTemplateFromDualityResult({
           ...rollResult,
