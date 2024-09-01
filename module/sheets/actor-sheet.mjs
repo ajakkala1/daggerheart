@@ -6,15 +6,40 @@ import {
   getDualityResult,
   buildTemplateFromDualityResult,
 } from "../helpers/dualityRoll.mjs";
+import FormApp from "./actor-sheet.svelte";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
 export class DaggerheartActorSheet extends ActorSheet {
+
+  // Injects Svelte app when initializing HTML
+  async _injectHTML(html) {
+    await super._injectHTML(html);
+    this.app = new FormApp({
+      target: html.find("form")[0],
+      props: {
+        sheetData: this.getData(),
+      },
+    });
+  }
+
+  // Injects Svelte app when replacing innerHTML
+  async _replaceHTML(element, html) {
+    await super._replaceHTML(element, html);
+    this.app = new FormApp({
+      target: html.find("form")[0],
+      props: {
+        sheetData: this.getData(),
+      },
+    });
+  }
+
+
   /** @override */
   static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+    const options = foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["daggerheart", "sheet", "actor"],
       width: 600,
       height: 600,
@@ -26,17 +51,20 @@ export class DaggerheartActorSheet extends ActorSheet {
         },
       ],
     });
+    console.log('get defaultOptions', options)
+    return options
   }
 
   /** @override */
   get template() {
+    console.log('get template', `systems/daggerheart/templates/actor/actor-${this.actor.type}-sheet.hbs`)
     return `systems/daggerheart/templates/actor/actor-${this.actor.type}-sheet.hbs`;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
-  async getData() {
+  getData() {
     // Retrieve the data structure from the base sheet. You can inspect or log
     // the context variable to see the structure, but some key properties for
     // sheets are the actor object, the data object, whether or not it's
@@ -47,6 +75,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     const actorData = this.document.toPlainObject();
 
     // Add the actor's data to context.data for easier access, as well as flags.
+    context.actor = actorData;
     context.system = actorData.system;
     context.flags = actorData.flags;
 
@@ -66,19 +95,19 @@ export class DaggerheartActorSheet extends ActorSheet {
 
     // Enrich biography info for display
     // Enrichment turns text like `[[/r 1d20]]` into buttons
-    context.enrichedBiography = await TextEditor.enrichHTML(
-      this.actor.system.biography,
-      {
-        // Whether to show secret blocks in the finished html
-        secrets: this.document.isOwner,
-        // Necessary in v11, can be removed in v12
-        async: true,
-        // Data to fill in for inline rolls
-        rollData: this.actor.getRollData(),
-        // Relative UUID resolution
-        relativeTo: this.actor,
-      },
-    );
+    // context.enrichedBiography = await TextEditor.enrichHTML(
+    //   this.actor.system.biography,
+    //   {
+    //     // Whether to show secret blocks in the finished html
+    //     secrets: this.document.isOwner,
+    //     // Necessary in v11, can be removed in v12
+    //     async: true,
+    //     // Data to fill in for inline rolls
+    //     rollData: this.actor.getRollData(),
+    //     // Relative UUID resolution
+    //     relativeTo: this.actor,
+    //   },
+    // );
 
     // Prepare active effects
     context.effects = prepareActiveEffectCategories(
@@ -87,6 +116,7 @@ export class DaggerheartActorSheet extends ActorSheet {
       this.actor.allApplicableEffects(),
     );
 
+    console.log('Exporting context', context)
     return context;
   }
 
