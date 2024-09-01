@@ -7,11 +7,13 @@
 <header class="sheet-header">
     <img alt="profile" class="profile-img" src="{actor.img}" data-edit="img" title="{actor.name}" height="100" width="100"/>
     <div class="header-fields">
-        <h1 class="charname"><input name="name" type="text" value="{actor.name}" placeholder="Name"/></h1>
+        <h1 class="charname">
+            <input name="name" type="text" value="{actor.name}" placeholder="Name"/>
+        </h1>
         <div class="resources grid grid-3col">
             <div class="resource flex-group-center">
                 <label for="system.hitpoints.value" class="resource-label">Hit Points</label>
-                <div class="resource-content flexrow flex-center flex-between">
+                <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.hitpoints.value" value="{system.hitpoints.value}" data-dtype="Number"/>
                     <span> / </span>
                     <input type="text" name="system.hitpoints.max" value="{system.hitpoints.max}" data-dtype="Number"/>
@@ -20,7 +22,7 @@
 
             <div class="resource flex-group-center">
                 <label for="system.stress.value" class="resource-label">Stress</label>
-                <div class="resource-content flexrow flex-center flex-between">
+                <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.stress.value" value="{system.stress.value}" data-dtype="Number"/>
                     <span> / </span>
                     <input type="text" name="system.stress.max" value="{system.stress.max}" data-dtype="Number"/>
@@ -29,7 +31,7 @@
 
             <div class="resource flex-group-center">
                 <label for="system.armor.value" class="resource-label">Armor</label>
-                <div class="resource-content flexrow flex-center flex-between">
+                <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.armor.value" value="{system.armor.value}" data-dtype="Number"/>
                     <span> / </span>
                     <input type="text" name="system.armor.max" value="{system.armor.max}" data-dtype="Number"/>
@@ -38,7 +40,7 @@
 
             <div class="resource flex-group-center">
                 <label for="system.hope.value" class="resource-label">Hope</label>
-                <div class="resource-content flexrow flex-center flex-between">
+                <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.hope.value" value="{system.hope.value}" data-dtype="Number"/>
                     <span> / </span>
                     <input type="text" name="system.hope.max" value="{system.hope.max}" data-dtype="Number"/>
@@ -47,12 +49,12 @@
 
             <div class="resource flex-group-center">
                 <label for="system.attributes.level.value" class="resource-label">Level</label>
-                <div class="resource-content flexrow flex-center flex-between">
+                <div class="resource-content flex flex-row items-center space-between">
                     <input type="text" name="system.attributes.level.value" value="{system.attributes.level.value}" data-dtype="Number"/>
                 </div>
             </div>
         </div>
-        <div class="abilities flexrow">
+        <div class="abilities flex flex-row">
             <div class="ability flexrow flex-group-center">
                 <label for="system.abilities.agility.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.agility.mod" data-label="Agility">Agility</label>
                 <input type="text" name="system.abilities.agility.value" value="{system.abilities.agility.value}" data-dtype="Number"/>
@@ -69,7 +71,7 @@
                 <span class="ability-mod rollable" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.finesse.mod" data-label="Finesse">{system.abilities.finesse.value}</span>
             </div>
         </div>
-        <div class="abilities flexrow">
+        <div class="abilities flex flex-row">
             <div class="ability flexrow flex-group-center">
                 <label for="system.abilities.instinct.value" class="resource-label rollable flexlarge align-left" data-roll-type="duality" data-roll="1d12[hope]+1d12[fear]+@abilities.instinct.mod" data-label="Instinct">Instinct</label>
                 <input type="text" name="system.abilities.instinct.value" value="{system.abilities.instinct.value}" data-dtype="Number"/>
