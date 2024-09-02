@@ -14,26 +14,53 @@ import { DaggerheartItem } from "../../documents/item.js";
  * @extends {ActorSheet}
  */
 export class DaggerheartActorSheet extends ActorSheet {
+  app?: FormApp;
+
   // Injects Svelte app when initializing HTML
   async _injectHTML(html: JQuery) {
     await super._injectHTML(html);
+    let sheetData: any = {
+      data: this.getData(),
+    };
+    const updateCallback = async (property: string, value: any) => {
+      // update document
+      await this.document.update({ [property]: value }, { render: false });
+      // update data on sheetData
+      sheetData.data = this.getData();
+      // Tell svelte to check its props again so that it will realize that "data" was externally updated by foundry
+      // @ts-ignore
+      this.app.$$.update();
+    };
+    // updateCallback.bind(this);
+    sheetData.update = updateCallback;
     // @ts-ignore
     this.app = new FormApp({
       target: html.find("form")[0],
       props: {
-        sheetData: this.getData(),
+        sheetData,
       },
     });
   }
 
   // Injects Svelte app when replacing innerHTML
   async _replaceHTML(element: JQuery, html: JQuery) {
-    await super._replaceHTML(element, html);
+    await super._injectHTML(html);
+    // @ts-ignore
+    let sheetData: any = {
+      data: this.getData(),
+    };
+    const updateCallback = (property: string, value: any) => {
+      // update document
+      this.document.update({ [property]: value });
+      // update data on sheetData
+      sheetData.data = this.getData().bind(this);
+    };
+    sheetData.update = updateCallback;
     // @ts-ignore
     this.app = new FormApp({
       target: html.find("form")[0],
       props: {
-        sheetData: this.getData(),
+        sheetData,
       },
     });
   }
