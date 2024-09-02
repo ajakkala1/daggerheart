@@ -6,7 +6,7 @@ import {
   getDualityResult,
   buildTemplateFromDualityResult,
 } from "../../helpers/dualityRoll.mjs";
-import FormApp from "./actor-character-sheet.svelte";
+import ActorSheetComponent from "./actor-character-sheet.svelte";
 import { DaggerheartItem } from "../../documents/item.js";
 import { injectSvelteComponent } from "../utils/svelte-helpers.js";
 
@@ -15,16 +15,14 @@ import { injectSvelteComponent } from "../utils/svelte-helpers.js";
  * @extends {ActorSheet}
  */
 export class DaggerheartActorSheet extends ActorSheet {
-  // Injects Svelte app when initializing HTML
   async _injectHTML(html: JQuery) {
     await super._injectHTML(html);
-    injectSvelteComponent(this, FormApp, html);
+    injectSvelteComponent(this, ActorSheetComponent, html);
   }
 
-  // Injects Svelte app when replacing innerHTML
   async _replaceHTML(element: JQuery, html: JQuery) {
     await super._injectHTML(html);
-    injectSvelteComponent(this, FormApp, html);
+    injectSvelteComponent(this, ActorSheetComponent, html);
   }
 
   /** @override */

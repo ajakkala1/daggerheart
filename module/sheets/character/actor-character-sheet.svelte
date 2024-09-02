@@ -1,9 +1,9 @@
 <script lang="ts">
     import Resource from '../shared-components/resource.svelte'
     import Level from '../shared-components/level-indicator.svelte'
-    export let sheetData: any
-    $: data = sheetData.data
-    $: update = sheetData.update
+    export let props: any
+    $: data = props.data
+    const update = props.update
     $: actor = data.actor
     $: system = data.system
 </script>

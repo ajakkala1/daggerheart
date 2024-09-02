@@ -19,6 +19,35 @@ export type SvelteComponent = {
  * @param sheet - A sheet instance. Must have access to a foundry document and implement getData()
  * @param svelteComponent - A svelte component to inject
  * @param html - Html node that will house the svelte component
+ *
+ * @example
+ *     // within your sheet class
+ *     import YourSheetComponent from "./your-sheet.svelte";
+ *
+ *     export class YourSheet extends SomeSheet {
+ *
+ *       async _injectHTML(html: JQuery) {
+ *         await super._injectHTML(html);
+ *         injectSvelteComponent(this, FormApp, html);
+ *       }
+ *
+ *       async _replaceHTML(element: JQuery, html: JQuery) {
+ *         await super._injectHTML(html);
+ *         injectSvelteComponent(this, FormApp, html);
+ *       }
+ *     }
+ *
+ *     // within your svelte component
+ *     <script lang="ts">
+ *       // very important that you have a single entry named "props"
+ *       export let props: any
+ *       // set up data with "$:" so that it will respond to updates
+ *       $: data = props.data
+ *       const update = props.update
+ *       // if you pick properties off of data and want those to update too, make sure to again use "$:"
+ *       $: myData = data.myData
+ *       $: otherStuff = data.otherStuff
+ *     </script>
  */
 export function injectSvelteComponent<T>(
   sheet: SvelteSheet<T>,
@@ -27,7 +56,7 @@ export function injectSvelteComponent<T>(
 ) {
   // Placeholder reference to the Svelte Component
   let app: any;
-  let sheetData: any = {
+  let props: any = {
     data: sheet.getData(),
   };
   // Create a callback which the component can call in order to make changes the document and then be notified once those changes are done
@@ -35,18 +64,18 @@ export function injectSvelteComponent<T>(
     // update document
     await sheet.document.update({ [property]: value }, { render: false });
     // update data on sheetData
-    sheetData.data = sheet.getData();
+    props.data = sheet.getData();
     // Tell svelte to check its props again so that it will realize that "data" was externally updated by foundry
     // @ts-ignore
     app.$$.update();
   };
-  sheetData.update = updateCallback;
+  props.update = updateCallback;
   const target = html.find("form")[0];
   // @ts-ignore
   app = new svelteComponent({
     target: target,
     props: {
-      sheetData,
+      props: props,
     },
   });
   return app;

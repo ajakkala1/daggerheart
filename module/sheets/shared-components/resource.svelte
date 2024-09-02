@@ -5,13 +5,9 @@
     export let max: number;
     const dispatch = createEventDispatcher<Record<'update', {value: number}>>()
     function increment() {
-        console.log('increment ', label)
-        // schemaField.value += 1
         dispatch('update', {value: value + 1})
     }
     function decrement() {
-        console.log('decrement ', label)
-        // schemaField.value -= 1
         dispatch('update', {value: value - 1})
     }
 </script>
