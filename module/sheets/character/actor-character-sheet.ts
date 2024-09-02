@@ -77,7 +77,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.actor = actorData;
     context.system = actorData.system;
     context.flags = actorData.flags;
-    context.documentRef = this.document;
+    context.documentHolder = this;
 
     // Adding a pointer to CONFIG.DAGGERHEART
     // @ts-ignore

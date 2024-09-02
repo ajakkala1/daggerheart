@@ -1,16 +1,39 @@
 <script lang="ts">
     import Resource from '../shared-components/resource.svelte'
     import Level from '../shared-components/level-indicator.svelte'
-    export let sheetData
-    const { actor, system, documentRef } = sheetData
-    function poop (schemaName: string, value: number) {
-        console.log('update', schemaName, value)
-        actor.update({[schemaName]: value})
+    export let sheetData: any
+    let { documentHolder } = sheetData
+    let actor: any;
+    let system: any;
+    $: {
+        console.log('props updated')
+        actor = documentHolder.document.toPlainObject()
+        system = actor.system
     }
-    $: hpValue = system.hitpoints.value
+    let hpValue = 0
+    $: {
+        hpValue = system.hitpoints.value
+        console.log('hp value updated', hpValue)
+    }
     $: hpMax = system.hitpoints.max
-    function updateHp(event: CustomEvent<{ value: number }>) {
-        documentRef.update({'system.hitpoints.value': event.detail.value})
+    // let actor: any;
+    // $: {
+    //     console.log('actor updated')
+    //     actor = document.toPlainObject()
+    // }
+    // $: system = actor.system
+    // console.log('component init', sheetData)
+    // $: img = actor.img
+    // $: actorName = actor.name
+    // function poop (schemaName: string, value: number) {
+    //     console.log('update', schemaName, value)
+    //     actor.update({[schemaName]: value})
+    // }
+    // $: hpValue = system.hitpoints.value
+    // $: hpMax = system.hitpoints.max
+    async function update(name: string, event: CustomEvent<{ value: number }>) {
+        await documentHolder.document.update({[name]: event.detail.value}, {render: false})
+        documentHolder = sheetData.documentHolder
     }
 </script>
 
@@ -22,10 +45,10 @@
             <input name="name" type="text" value="{actor.name}" placeholder="Name"/>
         </h1>
         <div class="resources grid grid-3col">
-            <Resource label="HP" value="{hpValue}" max="{hpMax}" on:update={updateHp}/>
-            <Resource label="STRESS" value="{system.stress.value}" max="{system.stress.max}" on:update={event => documentRef.update({'system.stress.value': event.detail.value})}/>
-            <Resource label="ARMOR" value="{system.armor.value}" max="{system.armor.max}" on:update={event => documentRef.update({'system.armor.value': event.detail.value})}/>
-            <Resource label="HOPE" value="{system.hope.value}" max="{system.hope.max}" on:update={event => documentRef.update({'system.hope.value': event.detail.value})}/>
+            <Resource label="HP" value="{hpValue}" max="{hpMax}" on:update={event => update('system.hitpoints.value', event)}/>
+            <Resource label="STRESS" value="{system.stress.value}" max="{system.stress.max}" on:update={event => update('system.stress.value', event)}/>
+            <Resource label="ARMOR" value="{system.armor.value}" max="{system.armor.max}" on:update={event => update('system.armor.value', event)}/>
+            <Resource label="HOPE" value="{system.hope.value}" max="{system.hope.max}" on:update={event => update('system.hope.value', event)}/>
 
             <div class="resource flex-group-center">
                 <Level levelSchema="{system.attributes.level}"/>
