@@ -6,36 +6,23 @@ import {
   getDualityResult,
   buildTemplateFromDualityResult,
 } from "../../helpers/dualityRoll.mjs";
-import FormApp from "./actor-character-sheet.svelte";
+import ActorSheetComponent from "./actor-character-sheet.svelte";
 import { DaggerheartItem } from "../../documents/item.js";
+import { injectSvelteComponent } from "../utils/svelte-helpers.js";
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
 export class DaggerheartActorSheet extends ActorSheet {
-  // Injects Svelte app when initializing HTML
   async _injectHTML(html: JQuery) {
     await super._injectHTML(html);
-    // @ts-ignore
-    this.app = new FormApp({
-      target: html.find("form")[0],
-      props: {
-        sheetData: this.getData(),
-      },
-    });
+    injectSvelteComponent(this, ActorSheetComponent, html);
   }
 
-  // Injects Svelte app when replacing innerHTML
   async _replaceHTML(element: JQuery, html: JQuery) {
-    await super._replaceHTML(element, html);
-    // @ts-ignore
-    this.app = new FormApp({
-      target: html.find("form")[0],
-      props: {
-        sheetData: this.getData(),
-      },
-    });
+    await super._injectHTML(html);
+    injectSvelteComponent(this, ActorSheetComponent, html);
   }
 
   /** @override */
@@ -77,7 +64,6 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.actor = actorData;
     context.system = actorData.system;
     context.flags = actorData.flags;
-    context.documentRef = this.document;
 
     // Adding a pointer to CONFIG.DAGGERHEART
     // @ts-ignore
