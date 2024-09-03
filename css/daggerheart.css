@@ -6,6 +6,28 @@
 /* Global styles */
 .window-app {
   font-family: "Roboto", sans-serif;
+  .window-content {
+    /* Remove the default 8px padding from all the modals, this lets our components take up the entire modal */
+    padding: 0 !important;
+  }
+}
+
+/* Removes base img styling */
+.daggerheart-img {
+  border: unset;
+  border-radius: unset;
+  max-width: unset;
+}
+
+.daggerheart-input {
+  box-shadow: unset !important;
+  width: unset !important;
+  min-width: unset !important;
+  height: unset !important;
+  background: unset !important;
+  color: unset !important;
+  border: unset !important;
+  border-radius: unset !important;
 }
 
 .rollable:hover,

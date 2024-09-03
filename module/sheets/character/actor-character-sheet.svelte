@@ -1,6 +1,6 @@
 <script lang="ts">
     import Resource from '../shared-components/resource.svelte'
-    import Level from '../shared-components/level-indicator.svelte'
+    import Indicator from '../shared-components/indicator.svelte'
     export let props: any
     $: data = props.data
     const update = props.update
@@ -9,20 +9,70 @@
 </script>
 
 <!-- Sheet Header -->
-<header class="sheet-header bg-base-100 text-neutral-100">
-    <img alt="profile" class="profile-img" src="{actor.img}" data-edit="img" title="{actor.name}" height="100" width="100"/>
-    <div class="header-fields">
-        <h1 class="charname">
-            <input name="name" type="text" value="{actor.name}" placeholder="Name"/>
-        </h1>
+<header class="flex flex-col w-full bg-base-100 text-neutral-100 p-2">
+
+    <!-- Top row contains profile pic, name, class, ancestry, community, downtime button, conditions, and level -->
+    <div class="flex flex-row justify-between w-full">
+
+        <!-- Left side of first row -->
+        <div class="flex">
+
+            <!-- Profile pic container  -->
+            <div class="rounded-full border m-4 h-16 w-16" style="border-color: #f3c267">
+                <img class="daggerheart-img border rounded-full h-16 w-16" style="border-color: #f3c267" alt="profile" src="{actor.img}" data-edit="img" title="{actor.name}"/>
+            </div>
+
+            <!-- Character details (name, class, ancestry, community, subclass) -->
+            <div class="flex flex-col justify-center">
+                <div class="text-white font-extrabold text-xl">
+                    <input class="daggerheart-input" type="text" placeholder="Name" value="{actor.name}" on:input={async e => {
+                    // @ts-ignore
+                    const updatedName = e.target.value
+                    console.log('updating actor name ', updatedName)
+                    update('name', updatedName)
+                }}/>
+                </div>
+                <div class="flex flex-row">
+                <span class="font-bold text-sm" style="color: #f3c267">
+                    SEABORNE RIBBET SORCERER &nbsp;
+                </span>
+                    <span class="text-sm text-white">
+                    (PRIMAL ORIGIN)
+                </span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right side of first row -->
+        <div class="flex flex-row">
+            <Indicator type="level" label="LEVEL" value="{system.attributes.level.value}"/>
+        </div>
+    </div>
+
+    <!-- Second row contains evasion, armor, armor slots, and the 6 main ability scores -->
+    <div class="flex flex-row">
+        <Indicator type="evasion" label="EVASION" value="{system.evasionScore.value}"></Indicator>
+        <Indicator type="armor" label="ARMOR" value="{system.armorScore.value}"></Indicator>
+        <Resource label="ARMOR SLOTS" value="{system.armor.value}" max="{system.armor.max}" on:update={event => update('system.armor.value', event.detail.value)}/>
+        <Indicator label="AGILITY" value="{system.abilities.agility.value}"></Indicator>
+        <Indicator label="STRENGTH" value="{system.abilities.strength.value}"></Indicator>
+        <Indicator label="FINESSE" value="{system.abilities.finesse.value}"></Indicator>
+        <Indicator label="INSTINCT" value="{system.abilities.instinct.value}"></Indicator>
+        <Indicator label="PRESENCE" value="{system.abilities.presence.value}"></Indicator>
+        <Indicator label="KNOWLEDGE" value="{system.abilities.knowledge.value}"></Indicator>
+    </div>
+
+
+    <div class="flex flex-row">
         <div class="resources grid grid-3col">
             <Resource label="HP" value="{system.hitpoints.value}" max="{system.hitpoints.max}" on:update={event => update('system.hitpoints.value', event.detail.value)}/>
             <Resource label="STRESS" value="{system.stress.value}" max="{system.stress.max}" on:update={event => update('system.stress.value', event.detail.value)}/>
-            <Resource label="ARMOR" value="{system.armor.value}" max="{system.armor.max}" on:update={event => update('system.armor.value', event.detail.value)}/>
+
             <Resource label="HOPE" value="{system.hope.value}" max="{system.hope.max}" on:update={event => update('system.hope.value', event.detail.value)}/>
 
             <div class="resource flex-group-center">
-                <Level levelSchema="{system.attributes.level}"/>
+
             </div>
         </div>
         <div class="abilities flex flex-row">

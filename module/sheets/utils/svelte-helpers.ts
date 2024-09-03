@@ -60,9 +60,21 @@ export function injectSvelteComponent<T>(
     data: sheet.getData(),
   };
   // Create a callback which the component can call in order to make changes the document and then be notified once those changes are done
-  const updateCallback = async (property: string, value: any) => {
+  const updateCallback = async (
+    property: string,
+    value: any,
+    source: boolean = false,
+  ) => {
     // update document
-    await sheet.document.update({ [property]: value }, { render: false });
+    if (source) {
+      // @ts-ignore
+      await sheet.document.updateSource(
+        { [property]: value },
+        { render: false },
+      );
+    } else {
+      await sheet.document.update({ [property]: value }, { render: false });
+    }
     // update data on sheetData
     props.data = sheet.getData();
     // Tell svelte to check its props again so that it will realize that "data" was externally updated by foundry
