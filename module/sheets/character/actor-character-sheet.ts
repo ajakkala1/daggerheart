@@ -64,6 +64,8 @@ export class DaggerheartActorSheet extends ActorSheet {
     context.actor = actorData;
     context.system = actorData.system;
     context.flags = actorData.flags;
+    context.roll = (formula: string, label: string) =>
+      this.roll(formula, label);
 
     // Adding a pointer to CONFIG.DAGGERHEART
     // @ts-ignore
@@ -347,6 +349,26 @@ export class DaggerheartActorSheet extends ActorSheet {
   }
 
   /**
+   * Roll function to pass to component
+   * TODO allow for rolls other than duality
+   */
+  async roll(formula: string, label: string) {
+    let roll = new Roll(formula, this.actor.getRollData());
+    const result = await roll.evaluate();
+    const rollResult = getDualityResult(result);
+    const content = buildTemplateFromDualityResult({
+      ...rollResult,
+      label: label,
+    });
+    ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: label,
+      rollMode: (game as Game).settings.get("core", "rollMode"),
+      content: content,
+    });
+  }
+
+  /**
    * Handle clickable rolls.
    * @param {Event} event   The originating click event
    * @private
@@ -368,6 +390,7 @@ export class DaggerheartActorSheet extends ActorSheet {
     // Handle rolls that supply the formula directly.
     if (dataset.roll) {
       let label = dataset.label ? `${dataset.label} Check` : "";
+      console.log("dataset.roll", dataset.roll);
       let roll = new Roll(dataset.roll, this.actor.getRollData());
       let messageData = {
         speaker: ChatMessage.getSpeaker({ actor: this.actor }),

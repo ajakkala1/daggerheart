@@ -6,6 +6,7 @@
     const update = props.update
     $: actor = data.actor
     $: system = data.system
+    $: roll = data.roll as (forumla: string, label: string) => void
 </script>
 
 <!-- Sheet Header -->
@@ -52,15 +53,21 @@
 
     <!-- Second row contains evasion, armor, armor slots, and the 6 main ability scores -->
     <div class="flex flex-row">
-        <Indicator type="evasion" label="EVASION" value="{system.evasionScore.value}"></Indicator>
-        <Indicator type="armor" label="ARMOR" value="{system.armorScore.value}"></Indicator>
+        <Indicator type="evasion" label="EVASION" value="{system.evasionScore.value}"/>
+        <Indicator type="armor" label="ARMOR" value="{system.armorScore.value}"/>
         <Resource label="ARMOR SLOTS" value="{system.armor.value}" max="{system.armor.max}" on:update={event => update('system.armor.value', event.detail.value)}/>
-        <Indicator label="AGILITY" value="{system.abilities.agility.value}"></Indicator>
-        <Indicator label="STRENGTH" value="{system.abilities.strength.value}"></Indicator>
-        <Indicator label="FINESSE" value="{system.abilities.finesse.value}"></Indicator>
-        <Indicator label="INSTINCT" value="{system.abilities.instinct.value}"></Indicator>
-        <Indicator label="PRESENCE" value="{system.abilities.presence.value}"></Indicator>
-        <Indicator label="KNOWLEDGE" value="{system.abilities.knowledge.value}"></Indicator>
+        <Indicator label="AGILITY" value="{system.abilities.agility.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.agility.mod", "Agility")}/>
+        <Indicator label="STRENGTH" value="{system.abilities.strength.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.strength.mod", "Strength")}/>
+        <Indicator label="FINESSE" value="{system.abilities.finesse.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.finesse.mod", "Finesse")}/>
+        <Indicator label="INSTINCT" value="{system.abilities.instinct.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.instinct.mod", "Instinct")}/>
+        <Indicator label="PRESENCE" value="{system.abilities.presence.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.presence.mod", "Presence")}/>
+        <Indicator label="KNOWLEDGE" value="{system.abilities.knowledge.value}"
+                   on:click={e => roll("1d12[hope]+1d12[fear]+@abilities.knowledge.mod", "Knowledge")}/>
     </div>
 
 
