@@ -1392,12 +1392,44 @@ html {
   bottom: 23px;
 }
 
+.left-2 {
+  left: 0.5rem;
+}
+
 .left-\[2px\] {
   left: 2px;
 }
 
 .right-\[30px\] {
   right: 30px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
+.top-0\.5 {
+  top: 0.125rem;
+}
+
+.top-7 {
+  top: 1.75rem;
+}
+
+.top-\[3px\] {
+  top: 3px;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
+.top-\[30px\] {
+  top: 30px;
+}
+
+.top-\[32px\] {
+  top: 32px;
 }
 
 .z-50 {
@@ -1459,6 +1491,10 @@ html {
 
 .w-\[66px\] {
   width: 66px;
+}
+
+.w-full {
+  width: 100%;
 }
 
 .flex-grow {
@@ -1525,6 +1561,10 @@ html {
   padding-right: 1rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -1533,6 +1573,14 @@ html {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-\[8px\] {
+  font-size: 8px;
+}
+
+.text-\[11px\] {
+  font-size: 11px;
 }
 
 .font-bold {
