@@ -37,8 +37,8 @@ export class DaggerheartDomainCardSheet extends ItemSheet {
   static get defaultOptions() {
     const options = foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["daggerheart", "sheet", "actor"],
-      width: 300,
-      height: 500,
+      width: 320,
+      height: 520,
       tabs: [
         {
           navSelector: ".sheet-tabs",
